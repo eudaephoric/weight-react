@@ -26,12 +26,12 @@ function computeEntryVariances(entries){
 export function loadData(){
   try{
     const raw = localStorage.getItem(KEY)
-    if(!raw) return { startDate: '', startWeight: '', targetWeight: '', entries: [] }
+  if(!raw) return { startWeight: '', targetWeight: '', entries: [] }
     const obj = JSON.parse(raw)
     obj.entries = computeEntryVariances(obj.entries || [])
     return obj
   }catch(e){
-    return { startDate: '', startWeight: '', targetWeight: '', entries: [] }
+    return { startWeight: '', targetWeight: '', entries: [] }
   }
 }
 

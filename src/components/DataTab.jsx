@@ -45,7 +45,7 @@ export default function DataTab({ data, setData }){
 
   function addDay(){
     const entries = [...(data.entries||[])]
-    const nextDate = entries.length ? dayAfter(entries[entries.length-1].date) : (data.startDate || new Date().toISOString().slice(0,10))
+    const nextDate = entries.length ? dayAfter(entries[entries.length-1].date) : new Date().toISOString().slice(0,10)
     entries.push({date: nextDate, weight: '', variance: null})
     const withVars = computeEntryVariances(entries)
     setData({...data, entries: withVars})
@@ -101,9 +101,6 @@ export default function DataTab({ data, setData }){
         </div>
         {showSettings && (
           <div className="settings-grid">
-            <label>Start date
-              <input type="date" name="startDate" value={data.startDate||''} onChange={updateSettings} />
-            </label>
             <label>Starting weight
               <input name="startWeight" type="number" value={data.startWeight||''} onChange={updateSettings} />
             </label>
