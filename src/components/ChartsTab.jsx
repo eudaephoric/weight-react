@@ -264,7 +264,7 @@ export default function ChartsTab({ data }){
         <label>To <input type="date" value={to} onChange={e=>setTo(e.target.value)} /></label>
   <label className="toggle-label" style={{marginLeft:12}}><input type="checkbox" checked={showGuides} onChange={e=>setShowGuides(e.target.checked)} /> <span>Show guides & enforce bounds</span></label>
   <label className="toggle-label" style={{marginLeft:20}}><input type="checkbox" checked={showTrend} onChange={e=>setShowTrend(e.target.checked)} /> <span>Show Trend</span></label>
-        <div style={{marginLeft:12, display:'inline-flex', gap:8}}>
+        <div className="quick-range">
           <button onClick={()=>setQuickRange('year')} title="Last year">Last Year</button>
           <button onClick={()=>setQuickRange('month')} title="Last month">Last Month</button>
           <button onClick={()=>setQuickRange('week')} title="Last week">Last Week</button>
