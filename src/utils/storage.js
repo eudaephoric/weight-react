@@ -8,6 +8,10 @@ function computeEntryVariances(entries){
   const out = []
   for(let i=0;i<entries.length;i++){
     const cur = Object.assign({}, entries[i])
+    // Ensure notes field exists, default to empty string for backward compatibility
+    if (cur.notes === undefined || cur.notes === null) {
+      cur.notes = ''
+    }
     const prev = entries[i-1]
     if(cur.weight==null || cur.weight===''){
       cur.variance = null

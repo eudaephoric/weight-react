@@ -45,7 +45,8 @@ main{flex:1;padding:18px;display:grid;grid-template-columns:1fr;gap:12px}
 .topbar nav button.active{color:#ffffff;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.18);box-shadow:0 4px 12px rgba(59,130,246,0.06)}
 .entry-header .col{padding:0 4px}
 .date-col{width:160px}
-.weight-col{width:200px}
+.weight-col{width:140px}
+.notes-col{width:250px}
 .delta-col{width:100px;text-align:center}
 .actions-col{flex:1}
 .row{display:flex;gap:8px;margin-top:8px}

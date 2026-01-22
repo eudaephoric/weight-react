@@ -84,6 +84,17 @@ export default function ChartsTab({ data }){
     })
   }, [data, year, from, to])
 
+  // Create a map of dates to notes for tooltip lookup
+  const notesMap = useMemo(()=>{
+    const map = {}
+    ;(data.entries||[]).forEach(e => {
+      if(e.date && e.notes){
+        map[e.date] = e.notes
+      }
+    })
+    return map
+  }, [data.entries])
+
   // monthly variance removed; keep daily deltas only
 
   // daily deltas (variance field stored on entries)
@@ -199,7 +210,22 @@ export default function ChartsTab({ data }){
   // compute explicit y-axis min/max from start and target weights when available
   const lineOptions = {
     responsive: true,
-    plugins: { legend: { display: false } },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const label = context.label || ''
+            const value = context.parsed.y !== null ? context.parsed.y : 'No weight'
+            const note = notesMap[label] || ''
+            if (note) {
+              return [ `Weight: ${value} lbs`, `Note: ${note}` ]
+            }
+            return `Weight: ${value} lbs`
+          }
+        }
+      }
+    },
     scales: {
       y: {
         beginAtZero: false,

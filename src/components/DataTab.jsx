@@ -46,7 +46,7 @@ export default function DataTab({ data, setData }){
   function addDay(){
     const entries = [...(data.entries||[])]
     const nextDate = entries.length ? dayAfter(entries[entries.length-1].date) : new Date().toISOString().slice(0,10)
-    entries.push({date: nextDate, weight: '', variance: null})
+    entries.push({date: nextDate, weight: '', variance: null, notes: ''})
     const withVars = computeEntryVariances(entries)
     setData({...data, entries: withVars})
     // mark last added index so we can focus its weight input after render
@@ -116,6 +116,7 @@ export default function DataTab({ data, setData }){
           <div className="entry-header">
             <div className="col date-col">Date</div>
             <div className="col weight-col">Weight</div>
+            <div className="col notes-col">Notes</div>
             <div className="col delta-col">Variance</div>
             <div className="col actions-col">Actions</div>
           </div>
@@ -124,6 +125,7 @@ export default function DataTab({ data, setData }){
               <div className="entry" key={e.date+idx}>
                 <input className="date-col" type="date" value={e.date} onChange={ev=>updateEntry(idx, 'date', ev.target.value)} />
                 <input ref={el=> inputRefs.current[idx]=el} className="weight-col" type="number" placeholder="weight" value={e.weight||''} onChange={ev=>updateEntry(idx, 'weight', ev.target.value)} style={{maxWidth:200}} />
+                <input className="notes-col" type="text" placeholder="Notes" value={e.notes||''} onChange={ev=>updateEntry(idx, 'notes', ev.target.value)} style={{maxWidth:250}} />
                 <div className="delta-col" style={{width:100,textAlign:'center'}}>{e.variance==null? '—' : Number(e.variance).toFixed(2)}</div>
                 <div className="actions-col"><button className="danger" onClick={()=>removeEntry(idx)}>Delete</button></div>
               </div>
